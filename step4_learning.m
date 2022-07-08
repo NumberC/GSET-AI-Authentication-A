@@ -7,7 +7,7 @@ time_start = cputime;
 p1a = load('p1/Galaxy_Office_L.mat');
 p2a = load('p2/Galaxy_Office_L.mat');
 p1b = load('p1/Galaxy_Office_R.mat');
-p2b = load('p2/Galaxy_Office_R.mat');
+p2b = load('p2/Galaxy_Office_L.mat');
 
 % Load Data First if Workspace Cleared
 person = [p1a p2a ...

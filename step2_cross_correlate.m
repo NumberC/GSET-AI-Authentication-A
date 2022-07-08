@@ -6,9 +6,8 @@ clear; clc; close all;
 
 %% Set File Name Parameters
 disp('Begin');
+
 % Set what audio file to use
-% Case and Glove settings should only go with Galaxy Device
-% Portrait and Landscape hands should only go with Tablet
 file_name = 'p2/Galaxy_Office_R';
 save_directory = 'user_data/';
 
