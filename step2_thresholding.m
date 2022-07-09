@@ -11,7 +11,7 @@ param_freq_range = [18e3, 22e3];
 param_len_pilot = 3600;
 %signal consists of 10 chirps
 param_len_signal = 24e3; %length of 10 chirps plus gap following each chirp
-param_len_chirp = 1200; %length of 1 chirp
+param_len_chirp = 1200; %length of 1 chirpW
 param_len_sbuffer = 3600; %length of buffer between signals
 param_len_cbuffer = 1200; %length of buffer between chirps
 param_num_signals = 40; %how many signals exist in recording

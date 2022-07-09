@@ -1,7 +1,10 @@
 recordings = dir("recordings");
+disp(recordings);
 
 % Go through each person in the recordings folder
 for person = recordings'
+    % GET RID OF THIS LINE:
+    continue
 
     % ignore p1 and p2 because those are examples and not actual data
     if person.name == "p1" || person.name == "p2"
@@ -77,3 +80,15 @@ for person = recordings'
         end
     end
 end
+
+person = cross_correlate_attempt(16e3, 50, 500, 0.125,10, 'Fadi/left/chirp_50hzto500hz_16khzfs_125ms_100ms_Repeat10/4.wav');
+
+% Failed
+% person = cross_correlate_attempt(48e3, 16e3, 24e3, 0.125,10, 'p2/1.wav');
+
+save_directory = "user_data/";
+file_name="p2/Galaxy_Office_R";
+if ~exist(save_directory, 'dir')
+       mkdir(save_directory);
+end
+save([save_directory file_name], 'person');
