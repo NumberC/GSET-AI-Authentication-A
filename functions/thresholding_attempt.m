@@ -1,12 +1,12 @@
 clear; clc; close all;
 
 dir = 'recordings/';
-name = 'Fadi/left/chirp_50hzto500hz_16khzfs_125ms_100ms_Repeat10/4';
+name = 'Fadi/Quiet/record_2022-07-09 14_58';
 file_received = [dir name '.wav'];
  
 %% Parameters of the Transmitted Signal
 %these values should not change unless you are transmitting a different signal
-file_transmit = 'chirp_50hzto500hz_16khzfs_125ms_100ms_Repeat10.wav';
+file_transmit = 'chirp_50hzto500hz_16khzfs_125ms_100ms_Repeat20.wav';
 param_freq_range = [50, 500];
 param_len_pilot = 3600;
 %signal consists of 10 chirps

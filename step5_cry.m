@@ -81,7 +81,7 @@ for person = recordings'
     end
 end
 
-person = cross_correlate_attempt(16e3, 50, 500, 0.125,10, 'Fadi/left/chirp_50hzto500hz_16khzfs_125ms_100ms_Repeat10/4.wav');
+person = cross_correlate_attempt(16e3, 50, 500, 0.125,20, 'Fadi/Quiet/record_2022-07-09 14_58.wav');
 
 % Failed
 % person = cross_correlate_attempt(48e3, 16e3, 24e3, 0.125,10, 'p2/1.wav');

@@ -3,8 +3,21 @@ clear; clc; close all;
 % Perform feature extraction on all user profiles in a given folder. Simply
 % provide the user ID for the files_num variable.
 
-files_num = 'p1';
-files_dir = ['user_data/Fadi/left/chirp_50hzto500hz_16khzfs_125ms_100ms_Repeat10/'];
+userDataDir = dir("user_data");
+for individualUserFolder = userDataDir'
+    if individualUserFolder.name == "p1" || individualUserFolder.name == "p2"
+        continue;
+    end
+
+    for fileA = individualUserFolder'
+        disp("HERE")
+        disp(fileA.name)
+    end
+
+    disp(individualUserFolder)
+end
+
+files_dir = ['user_data/Fadi/Quiet/'];
 
 files = dir(files_dir);
 files = {files(3:end).name}';
