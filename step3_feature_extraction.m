@@ -6,11 +6,12 @@ clear; clc; close all;
 userDataDir = dir("user_data");
 for individualUserFolder = userDataDir'
     userName = individualUserFolder.name;
+    
     if userName == "p1" || userName == "p2"
-        continue;
+        files_dir =['user_data/' userName '/'];
+    else
+        files_dir = ['user_data/' userName '/Quiet/'];
     end
-
-    files_dir = ['user_data/' userName '/Quiet/'];
 
     files = dir(files_dir);
     files = {files(3:end).name}';

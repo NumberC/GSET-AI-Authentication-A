@@ -3,13 +3,12 @@ clc; clear; close all;
 time_start = cputime;
 %% Set Parameters
 
-
 p1a = load('p1/Galaxy_Office_L.mat');
 p2a = load('p2/Galaxy_Office_L.mat');
 p1b = load('p1/Galaxy_Office_R.mat');
 p2b = load('p2/Galaxy_Office_L.mat');
 
-Fadi = load("Fadi/left/chirp_50hzto500hz_16khzfs_125ms_100ms_Repeat10/4.mat");
+Fadi = load("Fadi/Quiet/Galaxy_Office_L.mat");
 
 % Load Data First if Workspace Cleared
 person = [p1a p2a ...
@@ -25,8 +24,7 @@ for i = 1:length(person)
     t_data = array2table(person(i).person.features()');
     % We append to the features table the label of the person, i.e. P1
     % Cellstr repeats the label for some number of rows and 1 column
-    p_label = array2table(c ...
-        ellstr(repmat(['P' num2str(i)],chirps_for_train,1)),'VariableNames',{'Person'});
+    p_label = array2table(cellstr(repmat(['P' num2str(i)],chirps_for_train,1)),'VariableNames',{'Person'});
     table_test = label_table_data([t_data p_label]);
     
     master_data = [master_data; table_test]; 
