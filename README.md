@@ -22,12 +22,11 @@ MATLAB PROGRAMS <--- THIS IS THE REALLY IMPORTANT STUFF
 * Step 1: create_chirp.m: choose what type of chirp signal to create, saves .wav file
 * Step 2: cross_correlate.m: select audio file from audio folder and extract user-influenced signal from recording, creates profile
 ** Step 2 (Alternate): thresholding.m: cross_correlate may sometimes incorrectly calculate the user signal, thresholding is simpler method
-* feature_extraction.m: given user profile, calculate the features, saves user data into profile
-* learning.m: compiles all desired profiles into one data structure for classification learner app
+* Step 3: feature_extraction.m: given user profile, calculate the features, saves user data into profile
+* Step 4: learning.m: compiles all desired profiles into one data structure for classification learner app
+* Step 4: gesture.m: compiles gesture data to test a different approach
 
 CLASSIFICATION LEARNER APP <--- ALSO REALLY IMPORTANT
 * In MATLAB, open the APPS tab at the top of the screen
 * Click the Classification Learner icon (looks like bunch of red and blue dots)
 * Start a new learning session by loading your desired workspace data (master_data created by learning.m)
-* ???
-* profit

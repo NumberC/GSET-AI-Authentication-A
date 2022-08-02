@@ -1,37 +1,77 @@
 clc; clear; close all;
 
+isQuiet = true;
+
 time_start = cputime;
-%% Set Parameters
-
-p1a = load('p1/Galaxy_Office_L.mat');
-p2a = load('p2/Galaxy_Office_L.mat');
-p1b = load('p1/Galaxy_Office_R.mat');
-p2b = load('p2/Galaxy_Office_L.mat');
-
-Fadi = load("Fadi/Quiet/Galaxy_Office_L.mat");
-
-% Load Data First if Workspace Cleared
-person = [p1a p2a ...
-          p1b p2b ];
 %% Create table for user samples
 % Based on experiment parameters, maximum 400 sampled chirps per person
-chirps_for_train = 400; % this number should be a multiple of 10 b/c 10 chirps per sample
-
+chirps_for_train = 20; % this number should be a multiple of 10 b/c 10 chirps per sample
 master_data = []; % chirps_for_train * number of users = size of master_data
 
+userDataDir = dir("user_data");
+totalMatFiles = 0;
+
+% Loop over all mat files and add them to a tally
+for individualUserFolder = userDataDir'
+    userName = individualUserFolder.name;
+    if userName == "p1" || userName == "p2" || userName == "." || userName == ".."
+        continue;
+    end
+
+    quietDir=dir(['user_data/' userName '/Quiet/']);
+    loudDir=dir(['user_data/' userName '/Loud/']);
+
+    totalMatFiles = totalMatFiles + ( length(quietDir)-2 ) + ( length(loudDir)-2 );
+end
+
+% Format Person variable to be a struct array instead of cell array
+person = {};
+person(1).person = 0;
+
+personNames = {};
+
+currentMatFilesIndex = 1;
+
+for individualUserFolder = userDataDir'
+    userName = individualUserFolder.name;
+    if userName == "p1" || userName == "p2" || userName == "." || userName == ".."
+        continue;
+    end
+    
+    dirPath = ['user_data/' userName '/Quiet/'];
+    quietOrLoudDir=dir(dirPath);
+    for i=1:length(quietOrLoudDir)-2
+        matLabFile = load([dirPath int2str(i) '.mat']);
+        person(currentMatFilesIndex) = matLabFile;
+        personNames{end+1} = userName;
+        currentMatFilesIndex = currentMatFilesIndex + 1;
+    end
+
+    dirPath = ['user_data/' userName '/Loud/'];
+    quietOrLoudDir=dir(dirPath);
+    for i=1:length(quietOrLoudDir)-2
+        matLabFile = load([dirPath int2str(i) '.mat']);
+        person(currentMatFilesIndex) = matLabFile;
+        personNames{end+1} = userName;
+        currentMatFilesIndex = currentMatFilesIndex + 1;
+    end
+end
+
+disp(person)
+disp(length(person))
 for i = 1:length(person)
-% for i = 1:18
+    % for i = 1:18
     t_data = array2table(person(i).person.features()');
     % We append to the features table the label of the person, i.e. P1
     % Cellstr repeats the label for some number of rows and 1 column
-    p_label = array2table(cellstr(repmat(['P' num2str(i)],chirps_for_train,1)),'VariableNames',{'Person'});
+    p_label = array2table(cellstr(repmat(personNames(i),chirps_for_train,1)),'VariableNames',{'Person'});
+
     table_test = label_table_data([t_data p_label]);
     
     master_data = [master_data; table_test]; 
 end
 
 disp('Compiled Master Data');
-
 
 %% Functions
 function table = label_table_data(table)

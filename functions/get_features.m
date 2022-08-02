@@ -12,7 +12,6 @@ function [avg, std_data, max_data, min_data, ...
     change = [];
     [~,index] = size(sequence);
     for i = 1:index
-%         disp(i);
         temp = findchangepts(sequence(:,i));
         change = [change temp'];
     end
@@ -28,5 +27,4 @@ function [avg, std_data, max_data, min_data, ...
     [mfcc_data, fbe, frames_raw] = get_freq_data(sequence);
 
     frames = mean(abs(frames_raw));
-
 end

@@ -3,14 +3,20 @@ clear; clc; close all;
 % Perform feature extraction on all user profiles in a given folder. Simply
 % provide the user ID for the files_num variable.
 
+isQuiet = true;
+
 userDataDir = dir("user_data");
 for individualUserFolder = userDataDir'
     userName = individualUserFolder.name;
     
     if userName == "p1" || userName == "p2"
-        files_dir =['user_data/' userName '/'];
+        continue;
     else
-        files_dir = ['user_data/' userName '/Quiet/'];
+        if isQuiet
+            files_dir = ['user_data/' userName '/Quiet/'];
+        else
+            files_dir = ['user_data/' userName '/Loud/'];
+        end
     end
 
     files = dir(files_dir);
